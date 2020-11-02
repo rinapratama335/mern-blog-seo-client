@@ -1,18 +1,12 @@
-import { useState } from "react";
 import Link from "next/link";
+import { useState } from "react";
 import {
   Collapse,
+  Nav,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
-  Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
 } from "reactstrap";
 import { APP_NAME } from "../config";
 
