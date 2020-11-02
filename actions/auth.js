@@ -2,6 +2,7 @@ import fetch from "isomorphic-fetch";
 import cookie from "js-cookie";
 import { API } from "../config";
 
+//SIGN UP METHOD
 export const signup = (user) => {
   return fetch(`${API}/signup`, {
     method: "POST",
@@ -17,6 +18,7 @@ export const signup = (user) => {
     .catch((err) => console.log(err));
 };
 
+// SIGN IN METHOD
 export const signin = (user) => {
   return fetch(`${API}/signin`, {
     method: "POST",
@@ -53,7 +55,7 @@ export const removeCookie = (key) => {
 // Get cookie
 export const getCookie = (key) => {
   if (process.browser) {
-    cookie.get(key);
+    return cookie.get(key);
   }
 };
 
@@ -78,6 +80,7 @@ export const authenticate = (data, next) => {
   next();
 };
 
+// Check user is logged in or not
 export const isAuth = () => {
   if (process.browser) {
     const cookieChecked = getCookie("token");
@@ -89,4 +92,21 @@ export const isAuth = () => {
       }
     }
   }
+};
+
+// SIGN OUT METHOD
+export const signout = (next) => {
+  removeCookie("token");
+  removeLocalStorage("user");
+  next();
+
+  return fetch(`${API}/signout`, {
+    method: "GET",
+  })
+    .then((response) => {
+      console.log("Signout success");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
